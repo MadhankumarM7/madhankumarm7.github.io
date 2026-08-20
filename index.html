@@ -1821,24 +1821,46 @@
   }, {threshold:0.25});
   drawTargets.forEach(el=>drawObs.observe(el));
 
-  // ============ CONTACT FORM (builds mailto: from form fields) ============
-  (function contactForm(){
-    const form = document.getElementById('contactForm');
-    if(!form) return;
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = document.getElementById('cfName').value.trim();
-      const email = document.getElementById('cfEmail').value.trim();
-      const message = document.getElementById('cfMessage').value.trim();
-      const subject = encodeURIComponent('Portfolio inquiry from ' + name);
-      const body = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n\n' +
-        message
-      );
-      window.location.href = 'mailto:madhankumarhhh@yahoo.co.in?subject=' + subject + '&body=' + body;
-    });
-  })();
+// ============ CONTACT FORM (posts to Google Sheets via Apps Script) ============
+    (function contactForm(){
+          const form = document.getElementById('contactForm');
+          if(!form) return;
+          const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw44_5VmcbEtRBwNghIaRWKRvu3fkk9ViaR-ouHHXJkGX0FKPseWImOuXbtyqELTaKNdA/exec';
+          const submitBtn = form.querySelector('.cf-submit');
+          const originalBtnText = submitBtn.textContent;
+
+          form.addEventListener('submit', function(e){
+                  e.preventDefault();
+                  const name = document.getElementById('cfName').value.trim();
+                  const email = document.getElementById('cfEmail').value.trim();
+                  const message = document.getElementById('cfMessage').value.trim();
+
+                  submitBtn.textContent = 'Sending...';
+                  submitBtn.disabled = true;
+
+                  fetch(SHEET_ENDPOINT, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({name: name, email: email, message: message})
+                  })
+                          .then(function(){
+                                    submitBtn.textContent = 'Message Sent';
+                                    form.reset();
+                                    setTimeout(function(){
+                                                submitBtn.textContent = originalBtnText;
+                                                submitBtn.disabled = false;
+                                    }, 3000);
+                          })
+                          .catch(function(){
+                                    const subject = encodeURIComponent('Portfolio inquiry from ' + name);
+                                    const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+                                    window.location.href = 'mailto:madhankumarhhh@yahoo.co.in?subject=' + subject + '&body=' + body;
+                                    submitBtn.textContent = originalBtnText;
+                                    submitBtn.disabled = false;
+                          });
+          });
+    })();
 
   // ============ EMAIL COPY FALLBACK (mailto: often blocked in embedded webviews) ============
   (function emailCopyFallback(){
