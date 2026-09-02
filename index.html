@@ -721,6 +721,22 @@
   .skill-card h4{font-size:14.5px; font-weight:600; font-family:'Inter'; margin-bottom:6px;}
   .skill-card .tags{font-size:11.5px; color:var(--muted2); line-height:1.6;}
 
+  /* ============ AWARDS ============ */
+  .awards-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px;}
+  @media(max-width:900px){.awards-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.awards-grid{grid-template-columns:1fr;}}
+  .award-card{
+    background:#fff; border:1px solid #E8E8EE; border-radius:12px;
+    padding:24px 20px; display:flex; flex-direction:column; gap:6px;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .award-card:hover{transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.08);}
+  .award-icon{font-size:28px; margin-bottom:4px;}
+  .award-year{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan-dim); font-weight:600; letter-spacing:0.12em; text-transform:uppercase;}
+  .award-title{font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; color:var(--light-text); line-height:1.3;}
+  .award-cat{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--copper); background:rgba(255,176,32,0.1); border-radius:4px; padding:2px 8px; width:fit-content;}
+  .award-desc{font-size:13px; color:#5C6270; line-height:1.6; margin-top:4px;}
+
   /* ============ QUOTE ============ */
   .quote-band{background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .testimonial-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
@@ -916,6 +932,7 @@
       <a href="#process" data-cursor="ROUTE &rarr; Process">Process</a>
       <a href="#skills" data-cursor="ROUTE &rarr; Skills">Skills</a>
       <a href="#timeline" data-cursor="ROUTE &rarr; Career">Career</a>
+      <a href="#recognition" data-cursor="ROUTE &rarr; Awards">Awards</a>
       <a href="#console" data-cursor="ROUTE &rarr; Console">Console</a>
       <a href="#contact" data-cursor="ROUTE &rarr; Contact">Contact</a>
     </div>
@@ -1400,6 +1417,54 @@
         <div class="tl-title">Warehouse &amp; Stores Associate</div>
         <div class="tl-company">Sony Service Center</div>
         <div class="tl-desc">Managed stock receipts, dispatching, inventory logs, and engineer allocation: first exposure to structured operations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section id="recognition" class="section-light">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Recognition</div>
+      <h2>Recognised by the<br>teams that ran on these systems</h2>
+      <p class="section-sub">Five formal awards issued through DXC Technology's global peer recognition programme between 2021 and 2025.</p>
+    </div>
+    <div class="awards-grid reveal">
+      <div class="award-card">
+        <div class="award-icon">🤝</div>
+        <div class="award-year">2021</div>
+        <div class="award-title">Great Team Always</div>
+        <div class="award-cat">Collaborate</div>
+        <p class="award-desc">Recognised for sustained cross-team collaboration and knowledge-sharing within the enterprise IT operations group.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🛡️</div>
+        <div class="award-year">2021</div>
+        <div class="award-title">Eye for the Phish</div>
+        <div class="award-cat">Do the Right Thing</div>
+        <p class="award-desc">100% simulated phishing detection rate across all tests in FY22 H1. Awarded by the Global Chief Information Security Officer.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">⭐</div>
+        <div class="award-year">2023</div>
+        <div class="award-title">Thank You for Making a Difference</div>
+        <div class="award-cat">Deliver</div>
+        <p class="award-desc">Client and leadership acknowledgement for delivery excellence, professionalism, and consistent quality of output.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">📋</div>
+        <div class="award-year">2024</div>
+        <div class="award-title">Annual Training Completion</div>
+        <div class="award-cat">Do the Right Thing</div>
+        <p class="award-desc">Completed all mandatory Information Security Awareness and Code of Conduct training ahead of the global deadline. Awarded by the VP Chief Ethics & Compliance Officer.</p>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🛡️</div>
+        <div class="award-year">2025</div>
+        <div class="award-title">Eye for the Phish</div>
+        <div class="award-cat">Do the Right Thing</div>
+        <p class="award-desc">6 consecutive simulated phishing tests reported correctly across FY25. Recognised for strengthening the organisation's security posture.</p>
       </div>
     </div>
   </div>
