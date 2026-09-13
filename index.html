@@ -30,6 +30,8 @@
       document.addEventListener('click', function(e){
         var t = e.target;
         if(!t || !t.closest) return;
+        var dl = t.closest('#downloadPdfBtn, #sideDownloadTab');
+        if(dl){ ev('resume_download',{location: dl.id === 'sideDownloadTab' ? 'side_tab' : 'main_button'}); return; }
           var a = t.closest('a[href]');
         if(a){
           var h = a.getAttribute('href') || '';
@@ -57,6 +59,12 @@
           var el = document.getElementById(id);
           if(el){ io.observe(el); }
         });
+        var cf = document.getElementById('contactForm');
+        if(cf){ cf.addEventListener('submit', function(){
+          var hp = document.getElementById('cfWebsite');
+          if(hp && hp.value) return;
+          ev('contact_submit',{method:'form'});
+        }, true); }
       });
     })();
   </script>
