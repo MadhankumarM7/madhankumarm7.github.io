@@ -32,6 +32,10 @@
         if(!t || !t.closest) return;
         var dl = t.closest('#downloadPdfBtn, #sideDownloadTab');
         if(dl){ ev('resume_download',{location: dl.id === 'sideDownloadTab' ? 'side_tab' : 'main_button'}); return; }
+        var cli = t.closest('#console .cli-btn, #console .cli-execute');
+        if(cli){ ev('demo_interaction',{surface:'console', control:(cli.textContent||'').trim().slice(0,30)}); return; }
+        var cat = t.closest('#work .cat-btn');
+        if(cat){ ev('work_explore',{category:(cat.textContent||'').trim().slice(0,30)}); return; }
           var a = t.closest('a[href]');
         if(a){
           var h = a.getAttribute('href') || '';
@@ -41,6 +45,7 @@
                 if(h.indexOf('linkedin.com')>-1){ ev('social_click',{platform:'linkedin'}); return; }
                   if(h.indexOf('github.com')>-1){ ev('social_click',{platform:'github'}); return; }
                     if(h.indexOf('x.com')>-1 || h.indexOf('twitter.com')>-1){ ev('social_click',{platform:'x'}); return; }
+          if(h.charAt(0)==='#' && h.length>1){ ev('cta_click',{label:(a.textContent||'').trim().slice(0,30), destination:h}); return; }
                       return;
         }
           var b = t.closest('#flagshipTerminal button, #run-mira, #cmdkTrigger');
@@ -55,7 +60,7 @@
             if(x.isIntersecting && !seen[x.target.id]){ seen[x.target.id] = 1; ev('section_view',{section:x.target.id}); }
           });
         }, {threshold:0.05});
-        ['about','process','work','flagshipTerminal'].forEach(function(id){
+        ['about','process','work','skills','timeline','recognition','console','contact'].forEach(function(id){
           var el = document.getElementById(id);
           if(el){ io.observe(el); }
         });
