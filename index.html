@@ -42,7 +42,7 @@
           entries.forEach(function(x){
             if(x.isIntersecting && !seen[x.target.id]){ seen[x.target.id] = 1; ev('section_view',{section:x.target.id}); }
           });
-        }, {threshold:0.4});
+        }, {threshold:0.05});
         ['about','process','work','flagshipTerminal'].forEach(function(id){
           var el = document.getElementById(id);
           if(el){ io.observe(el); }
