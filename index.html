@@ -13,6 +13,43 @@
     gtag('js', new Date());
     gtag('config', 'G-3LDCQJ3HRM');
   </script>
+  <!-- GA4 custom event tracking -->
+  <script>
+    (function(){
+      function ev(n,p){ if(typeof gtag==='function'){ gtag('event',n,p||{}); } }
+      document.addEventListener('click', function(e){
+        var t = e.target;
+        if(!t || !t.closest) return;
+          var a = t.closest('a[href]');
+        if(a){
+          var h = a.getAttribute('href') || '';
+          if(h.indexOf('mailto:')===0){ ev('contact_click',{method:'email'}); return; }
+            if(h.indexOf('upwork.com')>-1){ ev('hire_click',{platform:'upwork'}); return; }
+              if(h.indexOf('fiverr.com')>-1){ ev('hire_click',{platform:'fiverr'}); return; }
+                if(h.indexOf('linkedin.com')>-1){ ev('social_click',{platform:'linkedin'}); return; }
+                  if(h.indexOf('github.com')>-1){ ev('social_click',{platform:'github'}); return; }
+                    if(h.indexOf('x.com')>-1 || h.indexOf('twitter.com')>-1){ ev('social_click',{platform:'x'}); return; }
+                      return;
+        }
+          var b = t.closest('#flagshipTerminal button, #run-mira, #cmdkTrigger');
+        if(b){ ev('demo_interaction',{control:(b.textContent||'').trim().slice(0,40)}); }
+      }, true);
+      document.addEventListener('DOMContentLoaded', function(){
+        setTimeout(function(){ ev('engaged_visit',{seconds:30}); }, 30000);
+        if(!('IntersectionObserver' in window)) return;
+          var seen = {};
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(x){
+            if(x.isIntersecting && !seen[x.target.id]){ seen[x.target.id] = 1; ev('section_view',{section:x.target.id}); }
+          });
+        }, {threshold:0.4});
+        ['about','process','work','flagshipTerminal'].forEach(function(id){
+          var el = document.getElementById(id);
+          if(el){ io.observe(el); }
+        });
+      });
+    })();
+  </script>
 <title>Madhankumar · Automation & Power Platform Specialist</title>
 <meta name="description" content="IT asset & configuration management, Power Platform automation, and AI-assisted engineering. Solo-built, production-proven systems, shipped under real deadlines.">
 <meta property="og:title" content="Madhankumar · Automation & Power Platform Specialist">
