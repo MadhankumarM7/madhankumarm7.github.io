@@ -414,6 +414,12 @@
   }
   .navlinks a:hover{color:var(--text);}
   .navlinks a:hover::after{width:100%;}
+  .navlinks a.nl-toolkit{color:var(--copper)}
+  .navlinks a.nl-toolkit::after{background:var(--copper)}
+  .navlinks a.nl-toolkit:hover{color:var(--copper)}
+  .nl-dot{position:absolute;top:-3px;right:-9px;width:6px;height:6px;border-radius:50%;
+    background:var(--copper);box-shadow:0 0 6px 1px rgba(255,176,32,.6);animation:nldotpulse 2s ease-in-out infinite}
+  @keyframes nldotpulse{0%,100%{opacity:1}50%{opacity:.35}}
   @media(max-width:768px){.navlinks{display:none;}}
   .btn{
     font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;
@@ -1004,6 +1010,7 @@
       <a href="#timeline" data-cursor="ROUTE &rarr; Career">Career</a>
       <a href="#recognition" data-cursor="ROUTE &rarr; Awards">Awards</a>
       <a href="#console" data-cursor="ROUTE &rarr; Console">Console</a>
+      <a href="tools.html" class="nl-toolkit" data-cursor="ROUTE &rarr; Toolkit">Toolkit<span class="nl-dot"></span></a>
       <a href="#contact" data-cursor="ROUTE &rarr; Contact">Contact</a>
     </div>
     <div class="cmdk-hint" id="cmdkTrigger" data-cursor="EXECUTE" role="button" tabindex="0" aria-label="Open command search (Cmd K)"><span>Search</span> <kbd>&#8984;K</kbd></div>
@@ -1076,6 +1083,7 @@
       <p class="lede">IT asset &amp; configuration management, Power Platform automation, and AI-assisted engineering. Solo-built, production-proven, under real deadlines.</p>
       <div class="hero-ctas">
         <a href="#work" class="btn btn-solid" data-cursor="EXECUTE">View My Work ↓</a>
+        <a href="tools.html" class="btn btn-ghost" data-cursor="ROUTE &rarr; Toolkit">Browse the Toolkit</a>
         <a href="#contact" class="btn btn-ghost" data-cursor="EXECUTE">Let's Talk</a>
       </div>
     </div>
