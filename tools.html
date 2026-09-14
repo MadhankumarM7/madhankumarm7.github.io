@@ -369,7 +369,23 @@ section{padding:96px 0;position:relative;z-index:5}
 .demo-bar .right{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted2)}
 .demo-grid{display:grid;grid-template-columns:400px 1fr}
 .demo-in{padding:26px;border-right:1px solid var(--line)}
-.demo-out{padding:26px;min-width:0}
+.demo-out{padding:26px;min-width:0;position:relative}
+.demo-gate{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  padding:26px;background:rgba(10,10,14,.88);backdrop-filter:blur(6px);
+  border-radius:16px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.demo-gate.show{opacity:1;pointer-events:auto}
+.dg-box{max-width:320px;text-align:center}
+.dg-box .dg-lock{width:34px;height:34px;margin:0 auto 14px;color:var(--cyan);opacity:.85}
+.dg-box h4{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;
+  margin:0 0 8px;letter-spacing:-.01em}
+.dg-box p{margin:0 0 16px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.dg-row{display:flex;flex-direction:column;gap:9px}
+.dg-row input{background:#0A0A0E;color:var(--text);border:1px solid var(--line);border-radius:9px;
+  padding:11px 13px;font-family:'Inter',sans-serif;font-size:13.5px;width:100%}
+.dg-row input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,229,201,.10)}
+.dg-row input::placeholder{color:var(--muted2)}
+.dg-note{margin-top:10px!important;font-family:'IBM Plex Mono',monospace!important;
+  font-size:10px!important;color:var(--muted2)!important}
 .fld{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.09em;
   text-transform:uppercase;color:var(--muted2);margin-bottom:9px}
 textarea{width:100%;height:224px;resize:vertical;background:#0A0A0E;color:var(--text);
@@ -486,6 +502,12 @@ textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(3
   transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,.35)}
 .wa-btn svg{width:20px;height:20px;display:block}
+.mail-btn{display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:100px;border:1px solid rgba(34,229,201,.35);
+  color:var(--cyan);vertical-align:-8px;margin-left:4px;
+  transition:background .2s var(--ease),transform .2s var(--ease)}
+.mail-btn:hover{background:rgba(34,229,201,.12);transform:translateY(-1px)}
+.mail-btn svg{width:13px;height:13px;display:block}
 
 .close h3{font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(23px,3.2vw,32px);letter-spacing:-.025em;margin:0 0 12px;max-width:19ch;position:relative}
@@ -746,6 +768,19 @@ footer a:hover{color:var(--cyan)}
           <p class="err" id="err" hidden></p>
         </div>
         <div class="demo-out">
+          <div class="demo-gate" id="demoGate">
+            <div class="dg-box">
+              <svg class="dg-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>
+              <h4>See the live numbers</h4>
+              <p>Runs instantly, no waiting. Tell me who's looking so I can follow up if you have questions.</p>
+              <form id="gateForm" class="dg-row">
+                <input type="text" id="dgName" placeholder="Your name" required>
+                <input type="email" id="dgEmail" placeholder="Your email" required>
+                <button type="submit" class="btn btn-solid" id="dgSubmit" data-cursor="EXECUTE">Unlock the demo <span class="arrow">→</span></button>
+              </form>
+              <p class="hint dg-note">One-time on this device. Nothing sent anywhere until you submit.</p>
+            </div>
+          </div>
           <div class="kpis">
             <div class="kpi"><span class="k">Tickets</span><span class="v" id="k-total">—</span></div>
             <div class="kpi"><span class="k">Still open</span><span class="v" id="k-open">—</span></div>
@@ -925,7 +960,8 @@ footer a:hover{color:var(--cyan)}
         <label for="bfMessage" class="sr-only" style="position:absolute;left:-9999px">What does your team do by hand every month?</label>
         <textarea id="bfMessage" placeholder="What does your team do by hand every month?" rows="4" required></textarea>
         <button type="submit" class="btn btn-solid" id="bfSubmit" data-cursor="EXECUTE">Send <span class="arrow">→</span></button>
-        <p class="bf-note" id="bfNote">Sends directly. No email app needed. Prefer email? <a href="mailto:madhankumarhhh@yahoo.co.in?subject=Custom%20build%20enquiry" style="color:var(--cyan)">madhankumarhhh@yahoo.co.in</a></p>
+        <p class="bf-note" id="bfNote">Sends directly. No email app needed. Prefer email?
+          <a class="mail-btn" href="mailto:madhankumarhhh@yahoo.co.in?subject=Custom%20build%20enquiry" data-cursor="EMAIL ME" aria-label="Email Madhankumar directly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5 12 13 21 6.5"/></svg></a></p>
       </form>
     </div>
   </div>
@@ -1301,10 +1337,49 @@ footer a:hover{color:var(--cyan)}
     requestAnimationFrame(step);
   }
 
+  /* ---- demo lead gate: capture name + email once before revealing live numbers ---- */
+  var LEAD_KEY = 'tk_demo_lead';
+  function hasLead(){ try{ return !!localStorage.getItem(LEAD_KEY); } catch(e){ return false; } }
+  function markLead(){ try{ localStorage.setItem(LEAD_KEY, '1'); } catch(e){} }
+  function showGate(){
+    var g = $('demoGate'); if(!g) return;
+    g.classList.add('show');
+    var n = $('dgName'); if(n) n.focus();
+  }
+  function hideGate(){ var g = $('demoGate'); if(g) g.classList.remove('show'); }
+  function sendLead(name, email){
+    var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw44_5VmcbEtRBwNghIaRWKRvu3fkk9ViaR-ouHHXJkGX0FKPseWImOuXbtyqELTaKNdA/exec';
+    fetch(SHEET_ENDPOINT, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name, email: email, message: '[Toolkit — Demo lead] Unlocked the live ticket-sla demo'})
+    }).catch(function(){});
+  }
+  function runGated(){
+    if(hasLead()){ run(); return; }
+    showGate();
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
-    reset();
-    $('run').addEventListener('click', run);
-    $('reset').addEventListener('click', reset);
+    $('csv').value = SAMPLE;
+    if(hasLead()){ run(); } else { showGate(); }
+    $('run').addEventListener('click', runGated);
+    $('reset').addEventListener('click', function(){
+      $('csv').value = SAMPLE;
+      runGated();
+    });
+    var gateForm = $('gateForm');
+    if(gateForm) gateForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = $('dgName').value.trim();
+      var email = $('dgEmail').value.trim();
+      if(!name || !email) return;
+      markLead();
+      sendLead(name, email);
+      ev('contact_click', {method:'demo_gate', source:'toolkit'});
+      hideGate();
+      run();
+    });
 
     Array.prototype.forEach.call(document.querySelectorAll('.buy'), function(a){
       a.addEventListener('click', function(){
