@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toolkit — Madhankumar</title>
+<title>IT Ops Toolkit — Madhankumar</title>
 <meta name="description" content="Enterprise ITSM dashboards, report automation and review decks. Run every one on your own export before you pay.">
-<meta property="og:title" content="Toolkit — Madhankumar">
+<meta property="og:title" content="IT Ops Toolkit — Madhankumar">
 <meta property="og:description" content="Enterprise ITSM dashboards, report automation and review decks. Run every one on your own export before you pay.">
 <meta property="og:image" content="https://madhankumarm7.github.io/og-preview.png">
 <meta property="og:url" content="https://madhankumarm7.github.io/tools.html">
@@ -370,22 +370,45 @@ section{padding:96px 0;position:relative;z-index:5}
 .demo-grid{display:grid;grid-template-columns:400px 1fr}
 .demo-in{padding:26px;border-right:1px solid var(--line)}
 .demo-out{padding:26px;min-width:0;position:relative}
-.demo-gate{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
-  padding:26px;background:rgba(10,10,14,.88);backdrop-filter:blur(6px);
-  border-radius:16px;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
-.demo-gate.show{opacity:1;pointer-events:auto}
-.dg-box{max-width:320px;text-align:center}
-.dg-box .dg-lock{width:34px;height:34px;margin:0 auto 14px;color:var(--cyan);opacity:.85}
-.dg-box h4{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;
-  margin:0 0 8px;letter-spacing:-.01em}
-.dg-box p{margin:0 0 16px;color:var(--muted);font-size:13.5px;line-height:1.5}
-.dg-row{display:flex;flex-direction:column;gap:9px}
-.dg-row input{background:#0A0A0E;color:var(--text);border:1px solid var(--line);border-radius:9px;
-  padding:11px 13px;font-family:'Inter',sans-serif;font-size:13.5px;width:100%}
-.dg-row input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,229,201,.10)}
-.dg-row input::placeholder{color:var(--muted2)}
-.dg-note{margin-top:10px!important;font-family:'IBM Plex Mono',monospace!important;
-  font-size:10px!important;color:var(--muted2)!important}
+/* ---- email verification (OTP) gate: blurs demo output + pack pricing/details until verified ---- */
+.lock-wrap{position:relative}
+.locked-blur{filter:blur(7px);pointer-events:none;user-select:none;transition:filter .35s var(--ease)}
+.lock-cta{position:absolute;inset:0;z-index:15;display:flex;align-items:center;justify-content:center;
+  border-radius:inherit;background:linear-gradient(180deg,rgba(9,9,12,.2),rgba(9,9,12,.62))}
+.lock-cta button{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:100px;
+  background:var(--cyan);color:#06201c;font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+  border:none;cursor:pointer;box-shadow:0 8px 24px rgba(34,229,201,.35);transition:transform .2s var(--ease)}
+.lock-cta button:hover{transform:translateY(-2px)}
+.lock-cta svg{width:15px;height:15px;flex:none}
+
+.verify-pill{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;align-items:center;gap:9px;
+  padding:12px 18px;border-radius:100px;background:var(--panel);border:1px solid rgba(34,229,201,.35);
+  box-shadow:0 10px 30px rgba(0,0,0,.45);font-family:'IBM Plex Mono',monospace;font-size:12px;
+  color:var(--text);cursor:pointer;transition:transform .2s var(--ease);max-width:calc(100vw - 40px)}
+.verify-pill:hover{transform:translateY(-2px)}
+.verify-pill svg{width:15px;height:15px;color:var(--cyan);flex:none}
+.verify-pill.hide{display:none}
+
+.vmodal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+  background:rgba(6,6,8,.72);backdrop-filter:blur(6px);padding:20px}
+.vmodal.show{display:flex}
+.vmodal-box{width:100%;max-width:400px;background:var(--panel);border:1px solid rgba(34,229,201,.25);
+  border-radius:20px;padding:28px;position:relative}
+.vmodal-box h4{margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em}
+.vmodal-box p{margin:0 0 18px;color:var(--muted);font-size:13.5px;line-height:1.5}
+.vmodal-box input{width:100%;box-sizing:border-box;background:#0A0A0E;border:1px solid var(--line);
+  border-radius:9px;padding:11px 13px;color:var(--text);font-family:'Inter',sans-serif;font-size:13.5px;margin-bottom:12px}
+.vmodal-box input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,229,201,.10)}
+.vmodal-box input::placeholder{color:var(--muted2)}
+.vmodal-box button[type="submit"]{width:100%;justify-content:center}
+.vmodal-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);
+  cursor:pointer;font-size:20px;line-height:1;padding:4px}
+.vmodal-err{color:var(--pink);font-size:12.5px;margin:-6px 0 12px;display:none;font-family:'IBM Plex Mono',monospace}
+.vmodal-err.show{display:block}
+.vmodal-resend{background:none;border:none;color:var(--cyan);font-size:12px;cursor:pointer;padding:0;
+  margin-top:12px;font-family:'IBM Plex Mono',monospace}
+.vmodal-resend:disabled{color:var(--muted2);cursor:default}
+.vmodal-to{font-family:'IBM Plex Mono',monospace;color:var(--cyan)}
 .fld{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.09em;
   text-transform:uppercase;color:var(--muted2);margin-bottom:9px}
 textarea{width:100%;height:224px;resize:vertical;background:#0A0A0E;color:var(--text);
@@ -502,12 +525,13 @@ textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(3
   transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,.35)}
 .wa-btn svg{width:20px;height:20px;display:block}
-.mail-btn{display:inline-flex;align-items:center;justify-content:center;
-  width:26px;height:26px;border-radius:100px;border:1px solid rgba(34,229,201,.35);
-  color:var(--cyan);vertical-align:-8px;margin-left:4px;
+.mail-btn{display:inline-flex;align-items:center;gap:6px;justify-content:center;
+  height:26px;padding:0 12px 0 4px;border-radius:100px;border:1px solid rgba(34,229,201,.35);
+  color:var(--cyan);white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:12px;
   transition:background .2s var(--ease),transform .2s var(--ease)}
 .mail-btn:hover{background:rgba(34,229,201,.12);transform:translateY(-1px)}
-.mail-btn svg{width:13px;height:13px;display:block}
+.mail-btn svg{width:13px;height:13px;display:block;flex:none}
+.bf-note{display:flex;align-items:center;flex-wrap:wrap;gap:8px 6px}
 
 .close h3{font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(23px,3.2vw,32px);letter-spacing:-.025em;margin:0 0 12px;max-width:19ch;position:relative}
@@ -592,7 +616,7 @@ footer a:hover{color:var(--cyan)}
 
 <nav class="nav">
   <div class="wrap">
-    <a class="home" href="./" data-cursor="ROUTE → Portfolio">← Madhankumar</a>
+    <a class="home" href="./" data-cursor="ROUTE → Portfolio">← Back to Home</a>
     <div class="spy" id="spy">
       <a href="#how" data-cursor="ROUTE → How it works">How</a>
       <a href="#proof" data-cursor="ROUTE → Proof">Before / after</a>
@@ -756,39 +780,31 @@ footer a:hover{color:var(--cyan)}
         <span class="ttl">ticket-sla · live</span>
         <span class="right">runs in your browser · nothing uploaded</span>
       </div>
-      <div class="demo-grid">
-        <div class="demo-in">
-          <label class="fld" for="csv">Paste a CSV export</label>
-          <textarea id="csv" spellcheck="false"></textarea>
-          <div class="demo-acts">
-            <button class="btn btn-solid" id="run" type="button" data-cursor="RUN">Run it <span class="arrow">→</span></button>
-            <button class="btn" id="reset" type="button" data-cursor="RESET">Reset sample</button>
-          </div>
-          <p class="hint">Needs <code>Status</code>, <code>SLA Target Hours</code>, and either <code>Actual Resolution Hours</code> or <code>Opened At</code>. <code>Priority</code> is used if present. Everything else is ignored.</p>
-          <p class="err" id="err" hidden></p>
-        </div>
-        <div class="demo-out">
-          <div class="demo-gate" id="demoGate">
-            <div class="dg-box">
-              <svg class="dg-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>
-              <h4>See the live numbers</h4>
-              <p>Runs instantly, no waiting. Tell me who's looking so I can follow up if you have questions.</p>
-              <form id="gateForm" class="dg-row">
-                <input type="text" id="dgName" placeholder="Your name" required>
-                <input type="email" id="dgEmail" placeholder="Your email" required>
-                <button type="submit" class="btn btn-solid" id="dgSubmit" data-cursor="EXECUTE">Unlock the demo <span class="arrow">→</span></button>
-              </form>
-              <p class="hint dg-note">One-time on this device. Nothing sent anywhere until you submit.</p>
+      <div class="lock-wrap">
+        <div class="demo-grid locked-blur">
+          <div class="demo-in">
+            <label class="fld" for="csv">Paste a CSV export</label>
+            <textarea id="csv" spellcheck="false"></textarea>
+            <div class="demo-acts">
+              <button class="btn btn-solid" id="run" type="button" data-cursor="RUN">Run it <span class="arrow">→</span></button>
+              <button class="btn" id="reset" type="button" data-cursor="RESET">Reset sample</button>
             </div>
+            <p class="hint">Needs <code>Status</code>, <code>SLA Target Hours</code>, and either <code>Actual Resolution Hours</code> or <code>Opened At</code>. <code>Priority</code> is used if present. Everything else is ignored.</p>
+            <p class="err" id="err" hidden></p>
           </div>
-          <div class="kpis">
-            <div class="kpi"><span class="k">Tickets</span><span class="v" id="k-total">—</span></div>
-            <div class="kpi"><span class="k">Still open</span><span class="v" id="k-open">—</span></div>
-            <div class="kpi bad"><span class="k">SLA breaches</span><span class="v" id="k-breach">—</span></div>
-            <div class="kpi good"><span class="k">Compliance</span><span class="v" id="k-comp">—</span></div>
+          <div class="demo-out">
+            <div class="kpis">
+              <div class="kpi"><span class="k">Tickets</span><span class="v" id="k-total">—</span></div>
+              <div class="kpi"><span class="k">Still open</span><span class="v" id="k-open">—</span></div>
+              <div class="kpi bad"><span class="k">SLA breaches</span><span class="v" id="k-breach">—</span></div>
+              <div class="kpi good"><span class="k">Compliance</span><span class="v" id="k-comp">—</span></div>
+            </div>
+            <div class="blk"><h4>Breaches by priority</h4><div id="by-priority"><p class="empty">Press Run it.</p></div></div>
+            <div class="blk"><h4>Open-ticket ageing</h4><div id="by-age"><p class="empty">Press Run it.</p></div></div>
           </div>
-          <div class="blk"><h4>Breaches by priority</h4><div id="by-priority"><p class="empty">Press Run it.</p></div></div>
-          <div class="blk"><h4>Open-ticket ageing</h4><div id="by-age"><p class="empty">Press Run it.</p></div></div>
+        </div>
+        <div class="lock-cta">
+          <button type="button" data-cursor="VERIFY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>Verify email to run the demo</button>
         </div>
       </div>
     </div>
@@ -808,20 +824,25 @@ footer a:hover{color:var(--cyan)}
         <span class="tag cu">Demo above</span>
         <h3>Ops Dashboard Pack</h3>
         <p class="out">Turn a raw ticket or asset export into the SLA, breach and ageing view your weekly review actually needs.</p>
-        <p class="who">For the service delivery lead who rebuilds a pivot every Monday.</p>
-        <ul>
-          <li>ticket-sla.xlsx — breach, ageing, priority, region, assignment group</li>
-          <li>asset-inventory.xlsx — lifecycle state, warranty, overdue tracking</li>
-          <li>350 sample rows, so you see it working before you touch your data</li>
-          <li>Formula-driven — replace the raw sheet, every figure recalculates</li>
-        </ul>
-        <div class="foot">
-          <span class="price"><span class="amt">₹999</span><span class="note">one payment</span></span>
-          <span style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn" href="#demo" data-cursor="RUN DEMO">Try it</a>
-            <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Ops%20Dashboard%20Pack" data-pack="ops-dashboard" data-price="999" data-cursor="BUY">Get it <span class="arrow">→</span></a>
-            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Ops Dashboard Pack on WhatsApp" data-wa-pack="ops-dashboard" data-wa-price="999" data-wa-name="Ops Dashboard Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
-          </span>
+        <div class="lock-wrap">
+          <div class="locked-blur">
+            <p class="who">For the service delivery lead who rebuilds a pivot every Monday.</p>
+            <ul>
+              <li>ticket-sla.xlsx — breach, ageing, priority, region, assignment group</li>
+              <li>asset-inventory.xlsx — lifecycle state, warranty, overdue tracking</li>
+              <li>350 sample rows, so you see it working before you touch your data</li>
+              <li>Formula-driven — replace the raw sheet, every figure recalculates</li>
+            </ul>
+            <div class="foot">
+              <span class="price"><span class="amt">₹999</span><span class="note">one payment</span></span>
+              <span style="display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn" href="#demo" data-cursor="RUN DEMO">Try it</a>
+                <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Ops%20Dashboard%20Pack" data-pack="ops-dashboard" data-price="999" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+                <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Ops Dashboard Pack on WhatsApp" data-wa-pack="ops-dashboard" data-wa-price="999" data-wa-name="Ops Dashboard Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+              </span>
+            </div>
+          </div>
+          <div class="lock-cta"><button type="button" data-cursor="VERIFY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>Verify email for price &amp; details</button></div>
         </div>
       </article>
 
@@ -829,19 +850,24 @@ footer a:hover{color:var(--cyan)}
         <span class="tag">Python</span>
         <h3>Report Automation Pack</h3>
         <p class="out">The scripts that turn a folder of monthly exports into one finished report, without anyone opening Excel.</p>
-        <p class="who">For the analyst whose month-end is twelve files and a merge.</p>
-        <ul>
-          <li>merge_reports.py — many exports into one master, headers reconciled</li>
-          <li>clean_export.py — the column fixes every export needs</li>
-          <li>monthly_build.py — one command, finished file</li>
-          <li>Sample data included, so you can run it before you trust it</li>
-        </ul>
-        <div class="foot">
-          <span class="price"><span class="amt">₹1,499</span><span class="note">one payment</span></span>
-          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-            <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Report%20Automation%20Pack" data-pack="report-automation" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
-            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Report Automation Pack on WhatsApp" data-wa-pack="report-automation" data-wa-price="1499" data-wa-name="Report Automation Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
-          </span>
+        <div class="lock-wrap">
+          <div class="locked-blur">
+            <p class="who">For the analyst whose month-end is twelve files and a merge.</p>
+            <ul>
+              <li>merge_reports.py — many exports into one master, headers reconciled</li>
+              <li>clean_export.py — the column fixes every export needs</li>
+              <li>monthly_build.py — one command, finished file</li>
+              <li>Sample data included, so you can run it before you trust it</li>
+            </ul>
+            <div class="foot">
+              <span class="price"><span class="amt">₹1,499</span><span class="note">one payment</span></span>
+              <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+                <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Report%20Automation%20Pack" data-pack="report-automation" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+                <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Report Automation Pack on WhatsApp" data-wa-pack="report-automation" data-wa-price="1499" data-wa-name="Report Automation Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+              </span>
+            </div>
+          </div>
+          <div class="lock-cta"><button type="button" data-cursor="VERIFY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>Verify email for price &amp; details</button></div>
         </div>
       </article>
 
@@ -849,19 +875,24 @@ footer a:hover{color:var(--cyan)}
         <span class="tag">PowerPoint</span>
         <h3>IT Review Deck Pack</h3>
         <p class="out">The four decks an IT lead rebuilds every quarter — structure, running order and the question each slide has to answer.</p>
-        <p class="who">For whoever stands up in front of the client on Thursday.</p>
-        <ul>
-          <li>monthly-service-review.pptx</li>
-          <li>qbr.pptx</li>
-          <li>incident-postmortem.pptx</li>
-          <li>automation-business-case.pptx — the one that gets your project funded</li>
-        </ul>
-        <div class="foot">
-          <span class="price"><span class="amt">₹799</span><span class="note">one payment</span></span>
-          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-            <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=IT%20Review%20Deck%20Pack" data-pack="review-decks" data-price="799" data-cursor="BUY">Get it <span class="arrow">→</span></a>
-            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about IT Review Deck Pack on WhatsApp" data-wa-pack="review-decks" data-wa-price="799" data-wa-name="IT Review Deck Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
-          </span>
+        <div class="lock-wrap">
+          <div class="locked-blur">
+            <p class="who">For whoever stands up in front of the client on Thursday.</p>
+            <ul>
+              <li>monthly-service-review.pptx</li>
+              <li>qbr.pptx</li>
+              <li>incident-postmortem.pptx</li>
+              <li>automation-business-case.pptx — the one that gets your project funded</li>
+            </ul>
+            <div class="foot">
+              <span class="price"><span class="amt">₹799</span><span class="note">one payment</span></span>
+              <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+                <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=IT%20Review%20Deck%20Pack" data-pack="review-decks" data-price="799" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+                <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about IT Review Deck Pack on WhatsApp" data-wa-pack="review-decks" data-wa-price="799" data-wa-name="IT Review Deck Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+              </span>
+            </div>
+          </div>
+          <div class="lock-cta"><button type="button" data-cursor="VERIFY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>Verify email for price &amp; details</button></div>
         </div>
       </article>
 
@@ -869,18 +900,23 @@ footer a:hover{color:var(--cyan)}
         <span class="tag">ServiceNow</span>
         <h3>CMDB Hygiene Kit</h3>
         <p class="out">What to check, how to check it, and the exception report to hand your auditor when they ask where the gaps are.</p>
-        <p class="who">For the CMDB owner with an audit date in the calendar.</p>
-        <ul>
-          <li>cmdb-validation-checklist.xlsx — the checks, in the order that finds most</li>
-          <li>reconciliation-queries.sql</li>
-          <li>exception-report.xlsx — audit-ready output</li>
-        </ul>
-        <div class="foot">
-          <span class="price"><span class="amt">₹1,499</span><span class="note">one payment</span></span>
-          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-            <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=CMDB%20Hygiene%20Kit" data-pack="cmdb-hygiene" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
-            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about CMDB Hygiene Kit on WhatsApp" data-wa-pack="cmdb-hygiene" data-wa-price="1499" data-wa-name="CMDB Hygiene Kit"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
-          </span>
+        <div class="lock-wrap">
+          <div class="locked-blur">
+            <p class="who">For the CMDB owner with an audit date in the calendar.</p>
+            <ul>
+              <li>cmdb-validation-checklist.xlsx — the checks, in the order that finds most</li>
+              <li>reconciliation-queries.sql</li>
+              <li>exception-report.xlsx — audit-ready output</li>
+            </ul>
+            <div class="foot">
+              <span class="price"><span class="amt">₹1,499</span><span class="note">one payment</span></span>
+              <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+                <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=CMDB%20Hygiene%20Kit" data-pack="cmdb-hygiene" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+                <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about CMDB Hygiene Kit on WhatsApp" data-wa-pack="cmdb-hygiene" data-wa-price="1499" data-wa-name="CMDB Hygiene Kit"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+              </span>
+            </div>
+          </div>
+          <div class="lock-cta"><button type="button" data-cursor="VERIFY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>Verify email for price &amp; details</button></div>
         </div>
       </article>
     </div>
@@ -890,15 +926,18 @@ footer a:hover{color:var(--cyan)}
         <h3>All four, one payment</h3>
         <p>Most teams that buy one come back for a second within a month. The bundle costs less than two packs bought separately.</p>
       </div>
-      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;position:relative">
-        <span class="price">
-          <span class="amt"><span class="strike">₹4,796</span>&nbsp; ₹3,499</span>
-          <span class="note save">You keep ₹1,297</span>
-        </span>
-        <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-          <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Toolkit%20Bundle" data-pack="bundle" data-price="3499" data-cursor="BUY">Get the bundle <span class="arrow">→</span></a>
-          <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Toolkit Bundle (all 4 packs) on WhatsApp" data-wa-pack="bundle" data-wa-price="3499" data-wa-name="Toolkit Bundle (all 4 packs)"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
-        </span>
+      <div class="lock-wrap" style="position:relative">
+        <div class="locked-blur" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+          <span class="price">
+            <span class="amt"><span class="strike">₹4,796</span>&nbsp; ₹3,499</span>
+            <span class="note save">You keep ₹1,297</span>
+          </span>
+          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Toolkit%20Bundle" data-pack="bundle" data-price="3499" data-cursor="BUY">Get the bundle <span class="arrow">→</span></a>
+            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Toolkit Bundle (all 4 packs) on WhatsApp" data-wa-pack="bundle" data-wa-price="3499" data-wa-name="Toolkit Bundle (all 4 packs)"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+          </span>
+        </div>
+        <div class="lock-cta"><button type="button" data-cursor="VERIFY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>Verify email for bundle price</button></div>
       </div>
     </div>
   </div>
@@ -960,8 +999,8 @@ footer a:hover{color:var(--cyan)}
         <label for="bfMessage" class="sr-only" style="position:absolute;left:-9999px">What does your team do by hand every month?</label>
         <textarea id="bfMessage" placeholder="What does your team do by hand every month?" rows="4" required></textarea>
         <button type="submit" class="btn btn-solid" id="bfSubmit" data-cursor="EXECUTE">Send <span class="arrow">→</span></button>
-        <p class="bf-note" id="bfNote">Sends directly. No email app needed. Prefer email?
-          <a class="mail-btn" href="mailto:madhankumarhhh@yahoo.co.in?subject=Custom%20build%20enquiry" data-cursor="EMAIL ME" aria-label="Email Madhankumar directly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5 12 13 21 6.5"/></svg></a></p>
+        <p class="bf-note" id="bfNote"><span>Sends directly. No email app needed.</span>
+          <a class="mail-btn" href="mailto:madhankumarhhh@yahoo.co.in?subject=Custom%20build%20enquiry" data-cursor="EMAIL ME" aria-label="Email Madhankumar directly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5 12 13 21 6.5"/></svg>Email Us</a></p>
       </form>
     </div>
   </div>
@@ -1337,48 +1376,137 @@ footer a:hover{color:var(--cyan)}
     requestAnimationFrame(step);
   }
 
-  /* ---- demo lead gate: capture name + email once before revealing live numbers ---- */
-  var LEAD_KEY = 'tk_demo_lead';
-  function hasLead(){ try{ return !!localStorage.getItem(LEAD_KEY); } catch(e){ return false; } }
-  function markLead(){ try{ localStorage.setItem(LEAD_KEY, '1'); } catch(e){} }
-  function showGate(){
-    var g = $('demoGate'); if(!g) return;
-    g.classList.add('show');
-    var n = $('dgName'); if(n) n.focus();
+  /* ---- email verification (OTP): unlocks the demo, pack pricing and pack details ---- */
+  var OTP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw44_5VmcbEtRBwNghIaRWKRvu3fkk9ViaR-ouHHXJkGX0FKPseWImOuXbtyqELTaKNdA/exec';
+  var VERIFY_KEY = 'tk_verified_v1';
+  function getVerified(){ try{ var v = JSON.parse(localStorage.getItem(VERIFY_KEY)||'null'); return (v && v.email) ? v : null; }catch(e){ return null; } }
+  function setVerified(name, email){ try{ localStorage.setItem(VERIFY_KEY, JSON.stringify({name:name, email:email, ts:Date.now()})); }catch(e){} }
+  function isVerified(){ return !!getVerified(); }
+
+  function unlockAll(){
+    document.body.classList.add('is-verified');
+    Array.prototype.forEach.call(document.querySelectorAll('.locked-blur'), function(el){ el.classList.remove('locked-blur'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.lock-cta'), function(el){ el.remove(); });
+    var pill = $('verifyPill'); if(pill) pill.classList.add('hide');
+    if($('csv') && !$('csv').value.trim()){ $('csv').value = SAMPLE; }
+    try{ run(); }catch(e){}
   }
-  function hideGate(){ var g = $('demoGate'); if(g) g.classList.remove('show'); }
-  function sendLead(name, email){
-    var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw44_5VmcbEtRBwNghIaRWKRvu3fkk9ViaR-ouHHXJkGX0FKPseWImOuXbtyqELTaKNdA/exec';
-    fetch(SHEET_ENDPOINT, {
-      method: 'POST', mode: 'no-cors',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({name: name, email: email, message: '[Toolkit — Demo lead] Unlocked the live ticket-sla demo'})
-    }).catch(function(){});
+
+  var vPendingName = '', vPendingEmail = '', vResendTimer = null;
+  function openVerify(){
+    var m = $('vModal'); if(!m) return;
+    m.classList.add('show');
+    $('vStep1').hidden = false; $('vStep2').hidden = true;
+    $('vErr').classList.remove('show');
+    var n = $('vName'); if(n) n.focus();
   }
-  function runGated(){
-    if(hasLead()){ run(); return; }
-    showGate();
+  function closeVerify(){ var m = $('vModal'); if(m) m.classList.remove('show'); }
+  function vShowErr(msg){ var e = $('vErr'); if(e){ e.textContent = msg; e.classList.add('show'); } }
+
+  function sendOtp(name, email){
+    return fetch(OTP_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'send_otp', name:name, email:email})
+    }).then(function(r){ return r.json(); });
+  }
+  function checkOtp(email, code){
+    return fetch(OTP_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'verify_otp', email:email, code:code})
+    }).then(function(r){ return r.json(); });
+  }
+  function startResendTimer(){
+    var btn = $('vResend'); if(!btn) return;
+    var t = 45;
+    btn.disabled = true; btn.textContent = 'Resend code (' + t + 's)';
+    clearInterval(vResendTimer);
+    vResendTimer = setInterval(function(){
+      t -= 1;
+      if(t <= 0){ clearInterval(vResendTimer); btn.disabled = false; btn.textContent = 'Resend code'; }
+      else { btn.textContent = 'Resend code (' + t + 's)'; }
+    }, 1000);
   }
 
   document.addEventListener('DOMContentLoaded', function(){
-    $('csv').value = SAMPLE;
-    if(hasLead()){ run(); } else { showGate(); }
-    $('run').addEventListener('click', runGated);
+    if(isVerified()){ unlockAll(); } else {
+      if($('csv')){ $('csv').value = SAMPLE; }
+      setTimeout(function(){ if(!isVerified()) openVerify(); }, 1400);
+    }
+
+    $('run').addEventListener('click', function(){
+      if(!isVerified()){ openVerify(); return; }
+      run();
+    });
     $('reset').addEventListener('click', function(){
       $('csv').value = SAMPLE;
-      runGated();
+      if(isVerified()) run();
     });
-    var gateForm = $('gateForm');
-    if(gateForm) gateForm.addEventListener('submit', function(e){
+
+    Array.prototype.forEach.call(document.querySelectorAll('.lock-cta button'), function(b){
+      b.addEventListener('click', function(e){ e.preventDefault(); openVerify(); });
+    });
+    var pill = $('verifyPill');
+    if(pill){ if(isVerified()) pill.classList.add('hide'); else pill.addEventListener('click', openVerify); }
+    var vClose = $('vClose'); if(vClose) vClose.addEventListener('click', closeVerify);
+    var vModalEl = $('vModal'); if(vModalEl) vModalEl.addEventListener('click', function(e){ if(e.target === vModalEl) closeVerify(); });
+
+    var vForm1 = $('vForm1');
+    if(vForm1) vForm1.addEventListener('submit', function(e){
       e.preventDefault();
-      var name = $('dgName').value.trim();
-      var email = $('dgEmail').value.trim();
-      if(!name || !email) return;
-      markLead();
-      sendLead(name, email);
-      ev('contact_click', {method:'demo_gate', source:'toolkit'});
-      hideGate();
-      run();
+      var name = $('vName').value.trim();
+      var email = $('vEmail').value.trim();
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      $('vErr').classList.remove('show');
+      if(!name || !emailOk){ vShowErr('Enter your name and a valid email.'); return; }
+      var btn = $('vSend'); btn.disabled = true; btn.textContent = 'Sending…';
+      sendOtp(name, email).then(function(res){
+        btn.disabled = false; btn.textContent = 'Send code →';
+        if(res && res.ok){
+          vPendingName = name; vPendingEmail = email;
+          $('vStep1').hidden = true; $('vStep2').hidden = false;
+          $('vCodeTo').textContent = email;
+          var c = $('vCode'); if(c) c.focus();
+          startResendTimer();
+        } else {
+          vShowErr((res && res.error) || 'Could not send the code. Check the email and try again.');
+        }
+      }).catch(function(){
+        btn.disabled = false; btn.textContent = 'Send code →';
+        vShowErr('Network error — try again in a moment.');
+      });
+    });
+
+    var vForm2 = $('vForm2');
+    if(vForm2) vForm2.addEventListener('submit', function(e){
+      e.preventDefault();
+      var code = $('vCode').value.trim();
+      $('vErr').classList.remove('show');
+      if(!/^[0-9]{6}$/.test(code)){ vShowErr('Enter the 6-digit code.'); return; }
+      var btn = $('vVerify'); btn.disabled = true; btn.textContent = 'Checking…';
+      checkOtp(vPendingEmail, code).then(function(res){
+        btn.disabled = false; btn.textContent = 'Verify →';
+        if(res && res.ok){
+          setVerified(vPendingName, vPendingEmail);
+          ev('contact_click', {method:'otp_verify', source:'toolkit'});
+          closeVerify();
+          unlockAll();
+        } else {
+          vShowErr((res && res.error) || 'Wrong or expired code. Try again or resend.');
+        }
+      }).catch(function(){
+        btn.disabled = false; btn.textContent = 'Verify →';
+        vShowErr('Network error — try again in a moment.');
+      });
+    });
+
+    var vResendBtn = $('vResend');
+    if(vResendBtn) vResendBtn.addEventListener('click', function(){
+      if(vResendBtn.disabled) return;
+      sendOtp(vPendingName, vPendingEmail).then(function(res){
+        if(res && res.ok){ startResendTimer(); } else { vShowErr((res && res.error) || 'Could not resend.'); }
+      }).catch(function(){ vShowErr('Network error — try again.'); });
     });
 
     Array.prototype.forEach.call(document.querySelectorAll('.buy'), function(a){
@@ -1471,5 +1599,35 @@ footer a:hover{color:var(--cyan)}
   });
 })();
 </script>
+
+<div class="verify-pill" id="verifyPill" data-cursor="VERIFY">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M7.5 10.5V7a4.5 4.5 0 0 1 9 0v3.5"/></svg>
+  Verify email to unlock demo &amp; pricing
+</div>
+
+<div class="vmodal" id="vModal">
+  <div class="vmodal-box">
+    <button type="button" class="vmodal-close" id="vClose" aria-label="Close">&times;</button>
+    <p class="vmodal-err" id="vErr"></p>
+    <div id="vStep1">
+      <h4>Quick email check</h4>
+      <p>One real email, verified once. No password, no account — this only unlocks the demo output and pack pricing on this device.</p>
+      <form id="vForm1">
+        <input type="text" id="vName" placeholder="Your name" autocomplete="name" required>
+        <input type="email" id="vEmail" placeholder="Your work or personal email" autocomplete="email" required>
+        <button type="submit" class="btn btn-solid" id="vSend" data-cursor="EXECUTE">Send code <span class="arrow">→</span></button>
+      </form>
+    </div>
+    <div id="vStep2" hidden>
+      <h4>Enter the code</h4>
+      <p>Sent to <span class="vmodal-to" id="vCodeTo"></span>. Valid for 10 minutes.</p>
+      <form id="vForm2">
+        <input type="text" id="vCode" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="6-digit code" autocomplete="one-time-code" required>
+        <button type="submit" class="btn btn-solid" id="vVerify" data-cursor="EXECUTE">Verify <span class="arrow">→</span></button>
+      </form>
+      <button type="button" class="vmodal-resend" id="vResend">Resend code</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
