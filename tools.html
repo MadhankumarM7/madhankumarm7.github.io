@@ -481,9 +481,34 @@ textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(3
 .close::after{content:"";position:absolute;width:340px;height:340px;left:-110px;bottom:-160px;
   border-radius:50%;background:radial-gradient(circle,rgba(34,229,201,.16),transparent 66%);
   animation:drift1 28s var(--ease) infinite alternate}
+.wa-btn{display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:100px;background:#25D366;color:#fff;flex:none;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,.35)}
+.wa-btn svg{width:20px;height:20px;display:block}
+
 .close h3{font-family:'Space Grotesk',sans-serif;font-weight:700;
   font-size:clamp(23px,3.2vw,32px);letter-spacing:-.025em;margin:0 0 12px;max-width:19ch;position:relative}
 .close p{margin:0;color:var(--muted);font-size:16px;max-width:48ch;position:relative}
+
+.enquiry{margin-top:20px;background:rgba(20,20,24,.78);backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.enquiry-bar{display:flex;align-items:center;gap:9px;padding:15px 20px;
+  background:rgba(28,28,34,.8);border-bottom:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.build-form{display:flex;flex-direction:column;gap:12px;padding:24px}
+.bf-row{display:flex;gap:12px;flex-wrap:wrap}
+.bf-row input{flex:1;min-width:200px}
+.build-form input,.build-form textarea{
+  background:#0A0A0E;color:var(--text);border:1px solid var(--line);border-radius:10px;
+  padding:13px 15px;font-family:'Inter',sans-serif;font-size:14.5px}
+.build-form input:focus,.build-form textarea:focus{outline:none;border-color:var(--cyan);
+  box-shadow:0 0 0 3px rgba(34,229,201,.10)}
+.build-form input::placeholder,.build-form textarea::placeholder{color:var(--muted2)}
+.build-form button{align-self:flex-start}
+.bf-note{margin:0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted2)}
 
 footer{padding:44px 0 72px;border-top:1px solid var(--line);color:var(--muted2);
   font-size:13.5px;position:relative;z-index:5}
@@ -760,6 +785,7 @@ footer a:hover{color:var(--cyan)}
           <span style="display:flex;gap:10px;flex-wrap:wrap">
             <a class="btn" href="#demo" data-cursor="RUN DEMO">Try it</a>
             <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Ops%20Dashboard%20Pack" data-pack="ops-dashboard" data-price="999" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Ops Dashboard Pack on WhatsApp" data-wa-pack="ops-dashboard" data-wa-price="999" data-wa-name="Ops Dashboard Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
           </span>
         </div>
       </article>
@@ -777,7 +803,10 @@ footer a:hover{color:var(--cyan)}
         </ul>
         <div class="foot">
           <span class="price"><span class="amt">₹1,499</span><span class="note">one payment</span></span>
-          <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Report%20Automation%20Pack" data-pack="report-automation" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Report%20Automation%20Pack" data-pack="report-automation" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Report Automation Pack on WhatsApp" data-wa-pack="report-automation" data-wa-price="1499" data-wa-name="Report Automation Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+          </span>
         </div>
       </article>
 
@@ -794,7 +823,10 @@ footer a:hover{color:var(--cyan)}
         </ul>
         <div class="foot">
           <span class="price"><span class="amt">₹799</span><span class="note">one payment</span></span>
-          <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=IT%20Review%20Deck%20Pack" data-pack="review-decks" data-price="799" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=IT%20Review%20Deck%20Pack" data-pack="review-decks" data-price="799" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about IT Review Deck Pack on WhatsApp" data-wa-pack="review-decks" data-wa-price="799" data-wa-name="IT Review Deck Pack"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+          </span>
         </div>
       </article>
 
@@ -810,7 +842,10 @@ footer a:hover{color:var(--cyan)}
         </ul>
         <div class="foot">
           <span class="price"><span class="amt">₹1,499</span><span class="note">one payment</span></span>
-          <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=CMDB%20Hygiene%20Kit" data-pack="cmdb-hygiene" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+          <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <a class="btn btn-solid buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=CMDB%20Hygiene%20Kit" data-pack="cmdb-hygiene" data-price="1499" data-cursor="BUY">Get it <span class="arrow">→</span></a>
+            <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about CMDB Hygiene Kit on WhatsApp" data-wa-pack="cmdb-hygiene" data-wa-price="1499" data-wa-name="CMDB Hygiene Kit"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+          </span>
         </div>
       </article>
     </div>
@@ -825,7 +860,10 @@ footer a:hover{color:var(--cyan)}
           <span class="amt"><span class="strike">₹4,796</span>&nbsp; ₹3,499</span>
           <span class="note save">You keep ₹1,297</span>
         </span>
-        <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Toolkit%20Bundle" data-pack="bundle" data-price="3499" data-cursor="BUY">Get the bundle <span class="arrow">→</span></a>
+        <span style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <a class="btn btn-copper buy" href="mailto:madhankumarhhh@yahoo.co.in?subject=Toolkit%20Bundle" data-pack="bundle" data-price="3499" data-cursor="BUY">Get the bundle <span class="arrow">→</span></a>
+          <a class="wa-btn" href="#" target="_blank" rel="noopener" data-cursor="CHAT" aria-label="Ask about Toolkit Bundle (all 4 packs) on WhatsApp" data-wa-pack="bundle" data-wa-price="3499" data-wa-name="Toolkit Bundle (all 4 packs)"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.629 4.62 1.828 6.563L4 29l7.617-1.797A11.94 11.94 0 0 0 16.001 27C22.619 27 28 21.619 28 15.001 28 8.383 22.619 3 16.001 3zm6.995 17.09c-.297.836-1.47 1.531-2.402 1.727-.639.135-1.474.243-4.285-.92-3.594-1.488-5.906-5.129-6.086-5.367-.18-.239-1.457-1.941-1.457-3.703 0-1.762.902-2.625 1.223-2.985.322-.36.703-.45.938-.45.234 0 .469.002.674.012.217.01.508-.082.793.605.297.703 1.008 2.465 1.096 2.645.088.18.146.393.029.633-.117.238-.176.387-.352.596-.176.209-.371.467-.531.627-.176.176-.359.367-.154.719.205.352.912 1.504 1.957 2.437 1.344 1.199 2.477 1.57 2.828 1.746.352.176.557.148.762-.09.205-.238.879-1.023 1.113-1.375.234-.352.469-.293.79-.176.322.117 2.045.965 2.396 1.141.352.176.586.264.674.41.088.146.088.848-.209 1.684z"/></svg></a>
+        </span>
       </div>
     </div>
   </div>
@@ -868,7 +906,27 @@ footer a:hover{color:var(--cyan)}
         <h3>Tell me what your team does by hand every month</h3>
         <p>If I can automate it, you get a price and a date. If I cannot, you get that answer too — and it costs nothing to ask.</p>
       </div>
-      <a class="btn btn-solid" id="enquire" href="mailto:madhankumarhhh@yahoo.co.in?subject=Custom%20build%20enquiry" data-cursor="EXECUTE">Start a conversation <span class="arrow">→</span></a>
+      <a class="btn btn-solid" href="#enquiryForm" data-cursor="EXECUTE">Tell me about it <span class="arrow">↓</span></a>
+    </div>
+
+    <div class="enquiry reveal" id="enquiryForm">
+      <div class="enquiry-bar"><span class="dot live"></span>Custom build enquiry · sends directly, no email app needed</div>
+      <form id="buildForm" class="build-form">
+        <div class="sr-only" aria-hidden="true" style="position:absolute;left:-9999px">
+          <label for="bfWebsite">Leave this field empty</label>
+          <input type="text" id="bfWebsite" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="bf-row">
+          <label for="bfName" class="sr-only" style="position:absolute;left:-9999px">Your name</label>
+          <input type="text" id="bfName" placeholder="Your name" required>
+          <label for="bfEmail" class="sr-only" style="position:absolute;left:-9999px">Your email</label>
+          <input type="email" id="bfEmail" placeholder="Your email" required>
+        </div>
+        <label for="bfMessage" class="sr-only" style="position:absolute;left:-9999px">What does your team do by hand every month?</label>
+        <textarea id="bfMessage" placeholder="What does your team do by hand every month?" rows="4" required></textarea>
+        <button type="submit" class="btn btn-solid" id="bfSubmit" data-cursor="EXECUTE">Send <span class="arrow">→</span></button>
+        <p class="bf-note" id="bfNote">Sends directly. No email app needed. Prefer email? <a href="mailto:madhankumarhhh@yahoo.co.in?subject=Custom%20build%20enquiry" style="color:var(--cyan)">madhankumarhhh@yahoo.co.in</a></p>
+      </form>
     </div>
   </div>
 </section>
@@ -1254,10 +1312,62 @@ footer a:hover{color:var(--cyan)}
         ev('hire_click', {platform:'toolkit', pack:a.getAttribute('data-pack')});
       });
     });
-    var enq = $('enquire');
-    if(enq) enq.addEventListener('click', function(){
-      ev('custom_enquiry', {source:'toolkit'}); ev('contact_click', {method:'email'});
-    });
+    /* ---- WhatsApp buttons: pre-filled default message per pack ---- */
+    (function(){
+      var WA_NUMBER = '919952666424';
+      Array.prototype.forEach.call(document.querySelectorAll('.wa-btn[data-wa-pack]'), function(a){
+        var name = a.getAttribute('data-wa-name');
+        var price = a.getAttribute('data-wa-price');
+        var msg = 'Hi Madhankumar, I\'d like to buy the ' + name + ' (\u20B9' + price + ').';
+        a.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+        a.addEventListener('click', function(){
+          ev('buy_click', {pack:a.getAttribute('data-wa-pack'), price:Number(price), method:'whatsapp'});
+        });
+      });
+    })();
+
+    /* ---- custom build enquiry: same delivery path as the portfolio contact form ---- */
+    (function(){
+      var form = $('buildForm');
+      if(!form) return;
+      var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw44_5VmcbEtRBwNghIaRWKRvu3fkk9ViaR-ouHHXJkGX0FKPseWImOuXbtyqELTaKNdA/exec';
+      var submitBtn = $('bfSubmit');
+      var originalHTML = submitBtn.innerHTML;
+      ev('custom_enquiry', {source:'toolkit'});
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var honeypot = $('bfWebsite');
+        if(honeypot && honeypot.value.trim() !== ''){
+          submitBtn.textContent = '✓ Sent'; form.reset();
+          setTimeout(function(){ submitBtn.innerHTML = originalHTML; submitBtn.disabled = false; }, 3000);
+          return;
+        }
+        var name = $('bfName').value.trim();
+        var email = $('bfEmail').value.trim();
+        var message = $('bfMessage').value.trim();
+        var tagged = '[Toolkit — Custom build] ' + message;
+
+        submitBtn.textContent = 'Sending…'; submitBtn.disabled = true;
+
+        fetch(SHEET_ENDPOINT, {
+          method: 'POST', mode: 'no-cors',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({name: name, email: email, message: tagged})
+        }).then(function(){
+          submitBtn.textContent = '✓ Sent — I\'ll reply by email';
+          form.reset();
+          ev('contact_click', {method:'form', source:'toolkit'});
+          setTimeout(function(){ submitBtn.innerHTML = originalHTML; submitBtn.disabled = false; }, 4000);
+        }).catch(function(){
+          var subject = encodeURIComponent('Custom build enquiry from ' + name);
+          var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+          window.location.href = 'mailto:madhankumarhhh@yahoo.co.in?subject=' + subject + '&body=' + body;
+          ev('contact_click', {method:'email_fallback', source:'toolkit'});
+          submitBtn.innerHTML = originalHTML; submitBtn.disabled = false;
+        });
+      });
+    })();
 
     var revealAll = function(){
       Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); });
